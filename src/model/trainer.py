@@ -2,21 +2,34 @@
 
 import pickle
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
 from utils.config import MODEL_PATH
 
 def train_model(X, y):
-    model = LogisticRegression()
+    """Train and save a logistic regression model"""
+    model = LogisticRegression(class_weight='balanced', max_iter=1000)
     model.fit(X, y)
-    with open(MODEL_PATH, 'wb') as f:
-        pickle.dump(model, f)
+    save_model(model)
     return model
 
 def evaluate_model(model, X_test, y_test):
+    """Evaluate model performance"""
     y_pred = model.predict(X_test)
-    print("📊 Evaluation Report:\n")
+    
+    print("\n📊 Model Evaluation Report")
+    print("="*40)
+    print(f"Accuracy: {accuracy_score(y_test, y_pred):.2f}")
+    print("\nClassification Report:")
     print(classification_report(y_test, y_pred))
+    print("\nConfusion Matrix:")
+    print(confusion_matrix(y_test, y_pred))
+
+def save_model(model):
+    """Save trained model to disk"""
+    with open(MODEL_PATH, 'wb') as f:
+        pickle.dump(model, f)
 
 def load_model():
+    """Load trained model from disk"""
     with open(MODEL_PATH, 'rb') as f:
         return pickle.load(f)
