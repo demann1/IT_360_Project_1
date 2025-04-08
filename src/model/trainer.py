@@ -3,7 +3,7 @@
 import pickle
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
-from utils.config import MODEL_PATH
+from src.utils.config import MODEL_PATH
 
 def train_model(X, y):
     """Train and save a logistic regression model"""

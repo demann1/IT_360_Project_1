@@ -2,7 +2,7 @@
 
 import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
-from utils.config import VECTORIZER_PATH, TFIDF_PARAMS
+from src.utils.config import VECTORIZER_PATH, TFIDF_PARAMS
 
 def build_vectorizer():
     return TfidfVectorizer(**TFIDF_PARAMS)
