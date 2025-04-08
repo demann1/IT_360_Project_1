@@ -1,0 +1,41 @@
+cleaned,actual_label,predicted_label,is_correct
+here s the agenda for the upcoming team meeting. please review it at your convenience. ref 2192,0,0,True
+your tax refund is ready for processing. please verify your banking information. ref 4970,1,1,True
+hello! just wanted to say thank you for your hard work on the project. ref 8548,0,0,True
+get exclusive rewards! click this link to redeem your special offer. ref 4128,1,1,True
+welcome to our newsletter! we hope you enjoy our monthly updates. ref 9730,0,0,True
+your tax refund is ready for processing. please verify your banking information. ref 1377,1,1,True
+the project deadline has been moved to next friday. let s meet this week to discuss it. ref 1759,0,0,True
+your account is at risk! click here to verify your credentials immediately. ref 9134,1,1,True
+verify your information to continue using your service. failure to do so will result in account deactivation. ref 4675,1,1,True
+your tax refund is ready for processing. please verify your banking information. ref 7640,1,1,True
+we noticed unusual login attempts on your account. confirm your password here to secure it. ref 9956,1,1,True
+don t miss out on our exclusive event! here are the details you need. ref 4418,0,0,True
+hope you re doing well! let s catch up over coffee sometime this week. ref 3392,0,0,True
+your recent transaction has been declined. verify your details to avoid penalties. ref 7696,1,1,True
+welcome to our newsletter! we hope you enjoy our monthly updates. ref 2005,0,0,True
+hello! just wanted to say thank you for your hard work on the project. ref 1146,0,0,True
+verify your information to continue using your service. failure to do so will result in account deactivation. ref 8364,1,1,True
+your recent order has shipped and should arrive within 5 7 business days. ref 2650,0,0,True
+urgent your bank account has been suspended. log in to restore access. ref 1364,1,1,True
+your recent transaction has been declined. verify your details to avoid penalties. ref 2910,1,1,True
+urgent your bank account has been suspended. log in to restore access. ref 2728,1,1,True
+welcome to our newsletter! we hope you enjoy our monthly updates. ref 5418,0,0,True
+dear user your subscription is about to expire. update your payment information here. ref 4443,1,1,True
+hello! just wanted to say thank you for your hard work on the project. ref 2656,0,0,True
+your tax refund is ready for processing. please verify your banking information. ref 5867,1,1,True
+your recent transaction has been declined. verify your details to avoid penalties. ref 4830,1,1,True
+can you send over the documents we discussed in the meeting yesterday? ref 2421,0,0,True
+verify your information to continue using your service. failure to do so will result in account deactivation. ref 8206,1,1,True
+hope you re doing well! let s catch up over coffee sometime this week. ref 7545,0,0,True
+can you send over the documents we discussed in the meeting yesterday? ref 4706,0,0,True
+hello! just wanted to say thank you for your hard work on the project. ref 8779,0,0,True
+hello! just wanted to say thank you for your hard work on the project. ref 8852,0,0,True
+the project deadline has been moved to next friday. let s meet this week to discuss it. ref 5554,0,0,True
+get exclusive rewards! click this link to redeem your special offer. ref 7963,1,1,True
+dear user your subscription is about to expire. update your payment information here. ref 2338,1,1,True
+urgent your bank account has been suspended. log in to restore access. ref 5869,1,1,True
+urgent your bank account has been suspended. log in to restore access. ref 9903,1,1,True
+your tax refund is ready for processing. please verify your banking information. ref 8145,1,1,True
+we noticed unusual login attempts on your account. confirm your password here to secure it. ref 9046,1,1,True
+warning! suspicious activity detected. click here to secure your account. ref 9875,1,1,True
