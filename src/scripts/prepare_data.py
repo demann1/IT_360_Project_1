@@ -23,4 +23,4 @@ def prepare_dataset(input_path, output_path):
     print(f"Processed data saved to {output_path}")
 
 if __name__ == "__main__":
-    prepare_dataset('data/test_email_dataset.csv', 'data/emails.csv')
+    prepare_dataset('src/Dataset/test_email_dataset.csv', 'data/emails.csv')
