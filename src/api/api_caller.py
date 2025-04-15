@@ -26,10 +26,10 @@ def authenticate_gmail():
             pickle.dump(creds, token)
     return build('gmail', 'v1', credentials=creds)
 
-def fetch_emails():
+def fetch_emails(max_results=10):
     """Fetch the latest emails from the Gmail inbox."""
     service = authenticate_gmail()
-    results = service.users().messages().list(userId='me', maxResults=10).execute()
+    results = service.users().messages().list(userId='me', maxResults=max_results).execute()
     messages = results.get('messages', [])
     email_texts = []
 
@@ -38,11 +38,12 @@ def fetch_emails():
         payload = msg.get('payload', {})
         headers = payload.get('headers', [])
         
-        # Extract subject and snippet
+        # Extract subject, sender, and snippet
         subject = next((header['value'] for header in headers if header['name'] == 'Subject'), "No Subject")
+        sender = next((header['value'] for header in headers if header['name'] == 'From'), "Unknown Sender")
         snippet = msg.get('snippet', "No Snippet Available")
         
         # Format the email output
-        email_texts.append(f"Subject: {subject}\nSnippet: {snippet}\n{'-' * 40}")
+        email_texts.append(f"Subject: {subject}\nSender: {sender}\n{'-' * 40}")
     
     return email_texts
