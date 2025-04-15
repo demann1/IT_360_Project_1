@@ -1,4 +1,4 @@
-v2,v1,predicted_label,is_correct
+email_text,v1,predicted_label,is_correct
 Your tax refund is ready for processing. Please verify your banking information. - Ref# 3397,1,,
 Here’s the agenda for the upcoming team meeting. Please review it at your convenience. - Ref# 9642,0,,
 Can you send over the documents we discussed in the meeting yesterday? - Ref# 4340,0,,
