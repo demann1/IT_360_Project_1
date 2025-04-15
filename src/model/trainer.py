@@ -3,7 +3,11 @@
 import pickle
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
-from utils.config import MODEL_PATH
+try: 
+    from src.utils.config import MODEL_PATH
+except (ModuleNotFoundError, ImportError) as e:
+    print (f"Error importing config: {e}")
+    MODEL_PATH = 'model/logistic_regression_model.pkl'
 
 def train_model(X, y):
     """Train and save a logistic regression model"""
