@@ -11,6 +11,8 @@ however droping the sample size down to a more reasonable 30-80 seems to be best
 Running this in local mode uses the dataset as a sample to train with, and then calls the Google API to draw 
 emails from your gmail inbox. So far there is only 1 user tied to this API so this would take some altering to 
 run from your computer. I would recommend changing the API call to your own Google API and allowing yourself
-access that way. 
+access that way. Adding the API credentials to the config folder as a json file named 'credentials.json' is the 
+correct way to add credentials in.
 
 This code is not perfect or proofed for security, use at your own risk.
+
