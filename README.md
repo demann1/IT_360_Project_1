@@ -1,8 +1,18 @@
 # IT_360_Project_1
-The goal of this project is to create a ML model that will detect phishing emails as well as spam emails.
+This is the ML phishing email detection bot code for our IT360 Final project. 
 
-To do this, we downloaded a .csv file with 200 sample emails labeled phishing 1 for phishing and 0 for safe. For the spam we will do a similar process flow, implement a labeled .csv list from an online source to train our ML model on and verify its detection rates. 
+To run this, open an integrated terminal in your IDE or simply download the file and then run it from CMD.
+"python main.py" and "python main.py --local" are the only two acceptable running scripts. 
 
-A successful outcome is the ML bot determining with 80% accuracy a fishing or spam email
+This bot has two modes of running, normal, and local. Running without the "--local" tag will run off a 
+model database with 200 labeled emails. The bot works by predicting if the email is a phishing email or
+not and outputs a simple output showing how many were predicted correctly, this often triggers 100% accuracy
+however droping the sample size down to a more reasonable 30-80 seems to be best for real world resemblence. 
+Running this in local mode uses the dataset as a sample to train with, and then calls the Google API to draw 
+emails from your gmail inbox. So far there is only 1 user tied to this API so this would take some altering to 
+run from your computer. I would recommend changing the API call to your own Google API and allowing yourself
+access that way. Adding the API credentials to the config folder as a json file named 'credentials.json' is the 
+correct way to add credentials in.
 
-To run this, running in --local mode calls the google API to the authorized users inbox to run phishing email scans on personal inboxes. This works by calling the API with the 'credentials.json' in the config folder. To run this, create your own API hook and add the credentials file in. 
+This code is not perfect or proofed for security, use at your own risk.
+
