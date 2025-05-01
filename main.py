@@ -72,6 +72,8 @@ def summarize_results(sample_data):
     print(f"Non-Spam Emails: {non_spam_count}")
 
 def main(local_run=True):
+    dataset_path = "src/dataset/test_email_dataset.csv"  # Ensure the dataset path is correct
+
     if local_run:
         print("Running in local mode...")
         # Fetch emails
@@ -97,7 +99,10 @@ def main(local_run=True):
     else:
         print("Running in dataset mode...")
         # Train the model on the dataset
-        train_and_save_model(dataset_path)
+        model = train_and_save_model(dataset_path)
+        if model is None:
+            print("Model training failed. Exiting dataset mode.")
+            return
 
         # Load the dataset for evaluation
         try:
@@ -107,8 +112,8 @@ def main(local_run=True):
             return
 
         # Check if the required column exists
-        if 'email_text' not in sample_data.columns:
-            print("The dataset must contain an 'email_text' column.")
+        if 'email_text' not in sample_data.columns or 'v1' not in sample_data.columns:
+            print("The dataset must contain 'email_text' and 'v1' columns.")
             return
 
         # Extract email texts
@@ -121,11 +126,7 @@ def main(local_run=True):
         sample_data['predicted_label'] = predictions
 
         # Check correctness by comparing predictions with actual labels
-        if 'v1' in sample_data.columns:
-            sample_data['is_correct'] = sample_data['v1'] == sample_data['predicted_label']
-        else:
-            print("The dataset must contain a 'v1' column for actual labels.")
-            return
+        sample_data['is_correct'] = sample_data['v1'] == sample_data['predicted_label']
 
         # Print the results
         for email, prediction in zip(email_texts, predictions):
@@ -139,28 +140,6 @@ def main(local_run=True):
         output_path = "test_results.csv"
         sample_data.to_csv(output_path, index=False)
         print(f"Results saved to {output_path}")
-
-    else:
-        print("Running in local mode...")
-        # Fetch emails
-        email_texts = fetch_emails(max_results=50)
-
-        # Classify the emails
-        predictions = classify_emails(email_texts)
-
-        # Create a DataFrame for the fetched emails
-        sample_data = pd.DataFrame({
-            'email_text': email_texts,
-            'predicted_label': predictions
-        })
-
-        # Print the results
-        for email, prediction in zip(email_texts, predictions):
-            label = "Spam" if prediction == 1 else "Not Spam"
-            print(f"Email: {email}\nPrediction: {label}\n{'-' * 40}")
-
-        # Generate and print the summary
-        summarize_results(sample_data)
 
 if __name__ == "__main__":
     # Parse command-line arguments
