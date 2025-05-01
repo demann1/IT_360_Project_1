@@ -7,13 +7,40 @@ from sklearn.model_selection import train_test_split
 from src.utils.config import DATA_PATH
 from src.utils.preprocessing import clean_text
 from src.utils.vectorizer import fit_and_save_vectorizer, transform_text
-from src.model.trainer import train_model, evaluate_model
+from src.model.trainer import train_model, evaluate_model, load_model
 from src.api.api_caller import fetch_emails
-from src.utils.preprocessing import clean_text
-from src.utils.vectorizer import transform_text
-from src.model.trainer import load_model
+
+def train_and_save_model(dataset_path):
+    """Train the model on the dataset and save it."""
+    try:
+        # Load the dataset
+        sample_data = pd.read_csv(dataset_path)
+    except FileNotFoundError:
+        print(f"Dataset not found at {dataset_path}. Please check the path.")
+        return None
+
+    # Check if the required columns exist
+    if 'email_text' not in sample_data.columns or 'v1' not in sample_data.columns:
+        print("The dataset must contain 'email_text' and 'v1' columns.")
+        return None
+
+    # Clean the text data
+    sample_data['cleaned_text'] = sample_data['email_text'].apply(clean_text)
+
+    # Split the dataset into training and testing sets
+    X_train = sample_data['cleaned_text']
+    y_train = sample_data['v1']
+
+    # Vectorize the text data and save the vectorizer
+    X_train_vec = fit_and_save_vectorizer(X_train)
+
+    # Train the model
+    model = train_model(X_train_vec, y_train)
+    print("Model trained and saved successfully.")
+    return model
 
 def classify_emails(email_texts):
+    """Classify a list of email texts as Spam or Not Spam."""
     # Clean the emails
     cleaned_emails = [clean_text(email) for email in email_texts]
 
@@ -69,8 +96,10 @@ def main(local_run=True):
 
     else:
         print("Running in dataset mode...")
-        # Load the sample dataset
-        dataset_path = "src/dataset/test_email_dataset.csv"
+        # Train the model on the dataset
+        train_and_save_model(dataset_path)
+
+        # Load the dataset for evaluation
         try:
             sample_data = pd.read_csv(dataset_path)
         except FileNotFoundError:
@@ -110,6 +139,28 @@ def main(local_run=True):
         output_path = "test_results.csv"
         sample_data.to_csv(output_path, index=False)
         print(f"Results saved to {output_path}")
+
+    else:
+        print("Running in local mode...")
+        # Fetch emails
+        email_texts = fetch_emails(max_results=50)
+
+        # Classify the emails
+        predictions = classify_emails(email_texts)
+
+        # Create a DataFrame for the fetched emails
+        sample_data = pd.DataFrame({
+            'email_text': email_texts,
+            'predicted_label': predictions
+        })
+
+        # Print the results
+        for email, prediction in zip(email_texts, predictions):
+            label = "Spam" if prediction == 1 else "Not Spam"
+            print(f"Email: {email}\nPrediction: {label}\n{'-' * 40}")
+
+        # Generate and print the summary
+        summarize_results(sample_data)
 
 if __name__ == "__main__":
     # Parse command-line arguments

@@ -38,11 +38,12 @@ def fetch_emails(max_results=10):
         payload = msg.get('payload', {})
         headers = payload.get('headers', [])
         
-        # Extract subject and snippet
+        # Extract subject, sender, and snippet
         subject = next((header['value'] for header in headers if header['name'] == 'Subject'), "No Subject")
+        sender = next((header['value'] for header in headers if header['name'] == 'From'), "Unknown Sender")
         snippet = msg.get('snippet', "No Snippet Available")
         
         # Format the email output
-        email_texts.append(f"Subject: {subject}\nSnippet: {snippet}\n{'-' * 40}")
+        email_texts.append(f"Subject: {subject}\nSender: {sender}\n{'-' * 40}")
     
     return email_texts
