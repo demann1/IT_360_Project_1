@@ -26,10 +26,10 @@ def authenticate_gmail():
             pickle.dump(creds, token)
     return build('gmail', 'v1', credentials=creds)
 
-def fetch_emails():
+def fetch_emails(max_results=10):
     """Fetch the latest emails from the Gmail inbox."""
     service = authenticate_gmail()
-    results = service.users().messages().list(userId='me', maxResults=10).execute()
+    results = service.users().messages().list(userId='me', maxResults=max_results).execute()
     messages = results.get('messages', [])
     email_texts = []
 

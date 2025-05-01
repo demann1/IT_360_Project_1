@@ -48,11 +48,25 @@ def main(local_run=True):
     if local_run:
         print("Running in local mode...")
         # Fetch emails
-        email_texts = fetch_emails()
-        
-        # Print results
-        for email in email_texts:
-            print(email)
+        email_texts = fetch_emails(max_results=30)
+
+        # Classify the emails
+        predictions = classify_emails(email_texts)
+
+        # Create a DataFrame for the fetched emails
+        sample_data = pd.DataFrame({
+            'email_text': email_texts,
+            'predicted_label': predictions
+        })
+
+        # Print the results
+        for email, prediction in zip(email_texts, predictions):
+            label = "Spam" if prediction == 1 else "Not Spam"
+            print(f"Email: {email}\nPrediction: {label}\n{'-' * 40}")
+
+        # Generate and print the summary
+        summarize_results(sample_data)
+
     else:
         print("Running in dataset mode...")
         # Load the sample dataset
